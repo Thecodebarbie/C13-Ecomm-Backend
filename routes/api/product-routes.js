@@ -4,14 +4,14 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 //http://localhost:3001/api/categories
 router.get('/', async (req, res) => {
-  // try {
+   try {
     const productData = await  Product.findAll({
       include: [{ model: Category}, {model: Tag,through:ProductTag} ],
     });
     res.status(200).json(productData);
-  // } catch (err) {
-  //   res.status(500).json(err);
-  // }
+   } catch (err) {
+     res.status(500).json(err);
+   }
   });
   
   router.get('/:id', async (req, res) => {
